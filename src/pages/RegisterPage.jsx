@@ -105,7 +105,7 @@ const RegisterPage = () => {
 
       <div className="w-full max-w-4xl z-10 animate-in fade-in slide-in-from-bottom-8 duration-700">
         <Card className="border-none shadow-2xl shadow-black/40 bg-white rounded-[32px] overflow-hidden">
-          <div className="p-10 md:p-14">
+          <div className="p-6 sm:p-10 md:p-14">
             <div className="mb-12">
               <h1 className="text-4xl font-bold text-slate-900 tracking-tight mb-2">Create your account</h1>
               <p className="text-slate-500 text-lg">Set up your company workspace and admin credentials</p>

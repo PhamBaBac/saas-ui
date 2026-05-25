@@ -318,7 +318,7 @@ const ProductManagement = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-blue-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-blue-500/20">
             <Package size={24} />

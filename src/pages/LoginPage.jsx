@@ -56,13 +56,13 @@ const LoginPage = () => {
   return (
     <div className="min-h-screen w-full flex flex-col md:flex-row font-sans">
       {/* Left Side - Dark Branding */}
-      <div className="w-full md:w-[45%] bg-[#1a1635] text-white p-12 md:p-24 flex flex-col justify-between relative overflow-hidden">
+      <div className="w-full md:w-[45%] bg-[#1a1635] text-white p-8 sm:p-12 md:p-24 flex flex-col justify-between relative overflow-hidden">
         {/* Background Decorative Blobs */}
         <div className="absolute top-[-10%] right-[-10%] w-80 h-80 bg-primary/20 rounded-full blur-[100px]"></div>
         <div className="absolute bottom-[-10%] left-[-10%] w-64 h-64 bg-blue-500/10 rounded-full blur-[80px]"></div>
 
         <div className="relative z-10">
-          <div className="flex items-center gap-2 mb-16">
+          <div className="flex items-center gap-2 mb-8 md:mb-16">
             <div className="w-10 h-10 bg-primary rounded-xl flex items-center justify-center shadow-lg shadow-primary/20">
               <Package size={24} className="text-white" />
             </div>
@@ -70,12 +70,12 @@ const LoginPage = () => {
           </div>
 
           <div className="space-y-6 max-w-sm">
-            <h1 className="text-4xl md:text-5xl font-bold tracking-tight">Welcome back</h1>
-            <p className="text-slate-400 text-lg">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">Welcome back</h1>
+            <p className="text-slate-400 text-base sm:text-lg">
               Sign in to your account to continue managing your inventory.
             </p>
 
-            <ul className="space-y-4 pt-8">
+            <ul className="space-y-4 pt-4 md:pt-8 hidden sm:block">
               {[
                 'Real-time stock tracking',
                 'Multi-tenant isolation',
@@ -90,13 +90,13 @@ const LoginPage = () => {
           </div>
         </div>
 
-        <div className="relative z-10 text-slate-500 text-sm">
+        <div className="relative z-10 text-slate-500 text-sm mt-8 md:mt-0">
           &copy; 2026 StockFlow Systems. All rights reserved.
         </div>
       </div>
 
       {/* Right Side - Light Sign In Form */}
-      <div className="flex-1 bg-slate-50 flex items-center justify-center p-8 md:p-12">
+      <div className="flex-1 bg-slate-50 flex items-center justify-center p-6 sm:p-8 md:p-12">
         <div className="w-full max-w-md animate-in fade-in slide-in-from-right-8 duration-700">
           <Card className="border-none shadow-xl shadow-slate-200/50 bg-white rounded-3xl p-4 md:p-8">
             <div className="mb-8">

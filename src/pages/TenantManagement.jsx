@@ -269,7 +269,7 @@ const TenantManagement = () => {
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
       {/* Page Header */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Administration</h1>
           <div className="flex items-center text-[12px] font-bold text-slate-400 mt-1.5">

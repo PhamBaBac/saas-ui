@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import {
   LayoutDashboard,
@@ -12,7 +12,9 @@ import {
   Box,
   Power,
   Activity,
-  Handshake
+  Handshake,
+  Menu,
+  X
 } from 'lucide-react';
 import useAuthStore from '@/store/authStore';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
@@ -21,6 +23,7 @@ const DashboardLayout = ({ children }) => {
   const { user, logout } = useAuthStore();
   const navigate = useNavigate();
   const location = useLocation();
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -49,17 +52,36 @@ const DashboardLayout = ({ children }) => {
   const menuItems = getMenuItems();
 
   return (
-    <div className="flex h-screen bg-[#e2e8f0] overflow-hidden font-sans">
+    <div className="flex h-screen bg-[#e2e8f0] overflow-hidden font-sans relative">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-black/60 z-30 lg:hidden backdrop-blur-sm transition-all duration-300"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className="w-[260px] bg-[#1a1635] text-white flex flex-col shrink-0 relative z-20 shadow-2xl">
+      <aside className={`
+        fixed inset-y-0 left-0 z-40 w-[260px] bg-[#1a1635] text-white flex flex-col shrink-0 shadow-2xl
+        transition-transform duration-300 ease-in-out lg:static lg:translate-x-0
+        ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'}
+      `}>
         {/* Logo */}
-        <div className="p-8 mb-2">
+        <div className="p-8 mb-2 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="w-9 h-9 bg-[#6366f1] rounded-xl flex items-center justify-center shadow-lg shadow-[#6366f1]/40">
               <Box size={20} className="text-white fill-white/20" />
             </div>
             <span className="text-xl font-bold tracking-tight">StockFlow</span>
           </div>
+          {/* Close button for mobile */}
+          <button 
+            onClick={() => setIsSidebarOpen(false)}
+            className="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 transition-all"
+          >
+            <X size={20} />
+          </button>
         </div>
 
         {/* Navigation Section Label */}
@@ -75,6 +97,7 @@ const DashboardLayout = ({ children }) => {
             <NavLink
               key={item.path}
               to={item.path}
+              onClick={() => setIsSidebarOpen(false)}
               className={({ isActive }) => `
                 flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-300 group
                 ${isActive
@@ -136,7 +159,35 @@ const DashboardLayout = ({ children }) => {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
-        <main className="flex-1 overflow-y-auto bg-[#f1f5f9] p-8 md:p-12 custom-scrollbar">
+        {/* Top Header Bar for Mobile */}
+        <header className="lg:hidden bg-[#1a1635] text-white h-16 shrink-0 flex items-center justify-between px-6 shadow-md relative z-10">
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => setIsSidebarOpen(true)}
+              className="p-2 rounded-xl text-slate-300 hover:text-white hover:bg-white/5 transition-all active:scale-95"
+            >
+              <Menu size={24} />
+            </button>
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 bg-[#6366f1] rounded-lg flex items-center justify-center">
+                <Box size={16} className="text-white fill-white/20" />
+              </div>
+              <span className="font-bold tracking-tight text-[16px]">StockFlow</span>
+            </div>
+          </div>
+          <div className="flex items-center gap-3">
+            <Avatar className="h-8 w-8 border border-white/10">
+              <AvatarFallback className="bg-slate-800 text-slate-400 text-[10px] font-bold">
+                {user?.role === 'ROLE_PLATFORM_ADMIN' ? 'PA' : 
+                 user?.role === 'ROLE_COMPANY_ADMIN' ? 'CA' : 
+                 user?.role === 'ROLE_ADMINISTRATOR' ? 'AD' : 
+                 user?.role === 'ROLE_SALES_OPERATOR' ? 'SO' : 'US'}
+              </AvatarFallback>
+            </Avatar>
+          </div>
+        </header>
+
+        <main className="flex-1 overflow-y-auto bg-[#f1f5f9] p-4 sm:p-8 md:p-12 custom-scrollbar">
           <div className="max-w-[1440px] mx-auto">
             {children}
           </div>

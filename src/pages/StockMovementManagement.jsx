@@ -397,7 +397,7 @@ const StockMovementManagement = () => {
 
   return (
     <div className="space-y-8 animate-in fade-in duration-700">
-      <div className="flex justify-between items-center">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div className="flex items-center gap-4">
           <div className="w-12 h-12 bg-emerald-500 rounded-2xl flex items-center justify-center text-white shadow-lg shadow-emerald-500/20">
             <Activity size={24} />
